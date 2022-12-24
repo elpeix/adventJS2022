@@ -6,11 +6,11 @@ function canExit(maze) {
   const graph = new Map()
   let startKey = null
   let exitKey = null
-  for (let i = 0; i < maze.length; i++) {
-    for (let j = 0; j < maze[i].length; j++) {
-      const cell = maze[i][j]
+
+  maze.forEach((row, i) => {
+    row.forEach((cell, j) => {
       if (cell === WALL) {
-        continue
+        return
       }
 
       const key = `${i},${j}`
@@ -34,8 +34,8 @@ function canExit(maze) {
         neighbors.push(`${i},${j + 1}`)
       }
       graph.set(key, neighbors)
-    }
-  }
+    })
+  })
 
   if (startKey === null || exitKey === null) {
     return false
